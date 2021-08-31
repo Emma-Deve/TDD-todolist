@@ -1,5 +1,8 @@
+/*
+
+
 // 引入需要测试的js文件
-import { add, fetchData1, fetchData2, fetchData3 } from './math'
+import { add, fetchData1, fetchData2, fetchData3 } from './01_AsyncFunc'
 
 // 给add函数编写测试用例：test case
 test('test function add 3 + 7', () => {
