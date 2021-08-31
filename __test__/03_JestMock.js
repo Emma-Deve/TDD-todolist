@@ -7,5 +7,11 @@ export function runCallback1(callback) {
 
 // 2. 使用axios发送ajax请求
 export const getData = () => {
+  // 发送真实的axios请求
   return axios.get('./api').then((res) => res.data)
+}
+
+//
+export function add(a, b) {
+  return a + b
 }

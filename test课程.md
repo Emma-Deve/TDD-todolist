@@ -104,9 +104,9 @@ test('toMatch',()=>{
 })
 //toContain
 test('toContain',()=>{
-  const arr = ['dell', 'lee', 'imooc']
+  const arr = ['night', 'mare', 'error']
   const data = new Set(arr)
-  expect(data).toContain('delllee')
+  expect(data).toContain('nightmare')
 })
 //toThrow
 const throwNewErrorFunc=()=>{
@@ -206,11 +206,10 @@ afterEach():在每一个用例执行之后调用个。
 
 ## 11.Jest mock 函数使用
 
-作用： 测试没有 return 的函数
-格式：const mockFunc = jest.fn() //mock 函数
-mockFunc.mock={ calls: [], instances: [], invocationCallOrder: [], results: [] }
-当 mockFunc 被调用多次，calls 就有多个'[]'
-如果要测试被调用的次数： mockFunc.mock.calls.length
+在实际项目的单元测试中，
+jest.fn()常被用来进行某些有回调函数的测试；
+jest.mock()可以 mock 整个模块中的方法，当某个模块已经被单元测试 100%覆盖时，使用 jest.mock()去 mock 该模块，节约测试时间和测试的冗余度是十分必要；
+当需要测试某些必须被完整执行的方法时，常常需要使用 jest.spyOn()。这些都需要开发者根据实际的业务代码灵活选择。
 
 ```js 1. 测试回调函数：const mockFunc = jest.fn()
 // 代码
@@ -276,11 +275,20 @@ export const getData = () => {
     .then((res) => res.data)
 }
 //3.2 自定义mock文件:demo.js（放在'__mocks__'文件夹中）
+export const fetchData = () => {
+  //自定义一个Promise给定返回的数据(代替发送数据请求)
+  return new Promise((resolved, reject) => {
+    resolved({
+      data: "(function(){return '123})()",
+    })
+  })
+}
 
 //3.3 测试代码
 /* 3.3.1 引入mock数据
-引入__mock__中的demo.js模拟代码，也可以设置jest.config.js/automock:ture, jest会自己去寻找对应__mock__文件中的demo */
-jest.mock('./demo')
-import { fetchData } from './demo' //fetchData自动引入的是__mock__文件中的demo
-const { getNumber } = jest.requireActual('./demo') //getNumber从真实的代码文件中获取，不适用mock文件
+引入__mocks__中的demo.js模拟代码，也可以设置jest.config.js/automock:ture, jest会自己去寻找对应__mocks__文件中的demo */
+import { fetchData } from './demo' //当前需要测试的代码文件
+jest.mock('./demo') //jest.mock表示上面的fetchData从 mocks 文件夹中取
+
+const { getNumber } = jest.requireActual('./demo') //getNumber从真实的代码文件中获取，不从mock文件
 ```

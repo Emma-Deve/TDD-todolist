@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { runCallback1, getData } from './03_JestMock'
+import { runCallback1, getData } from '../03_JestMock'
 // 用jest mock一个axios请求，而不是向真实的api发送请求
 jest.mock('axios')
 
@@ -25,7 +25,7 @@ test('test runCallback1', () => {
   expect(mockFunc.mock.calls[0]).toEqual(['abc']) // 方法三：测试回调函数 传递的值
 })
 
-// 2. 测试axios发送ajax请求
+// 2. 测试axios发送ajax请求: 使用 jest.mock('axios') mock axios库
 /* 测试axios请求时不会真的发送请求到api接口，否则耗时过大，我们只需要测试是否发送了异步请求即可，
 api能不能拿到数据时后端写api时自己需要做的测试 */
 test('测试 getData', async () => {

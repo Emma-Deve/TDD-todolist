@@ -3,7 +3,7 @@
 
 module.exports = {
   // All imported modules in your tests should be mocked automatically
-  // automock: false, //时候自动寻找__mock__中自定义的mock替换函数
+  // automock: false, //时候自动寻找__mock__中自定义的 替换文件，（要求具有相同文件名）
 
   // Stop running tests after `n` failures
   // bail: 0,
