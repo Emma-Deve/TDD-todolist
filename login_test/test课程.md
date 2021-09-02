@@ -150,21 +150,21 @@ describe('fetchData2 相关的测试方法', () => {
   test('fetchData2 return true', () => {
     return fetchData2().then((response) => {
       expect(response.data).toEqual({
-        success: true,
+        success: true
       })
     })
   })
   //方法二:测试返回的data中的resolves里面是否包含data: { success: true },
   test('fetchData2 return true', () => {
     return expect(fetchData2()).resolves.toMatchObject({
-      data: { success: true },
+      data: { success: true }
     })
   })
   //方法三：通过async await获取结果并判断结果
   test('fetchData2 return true', async () => {
     const response = await fetchData2()
     expect(response.data).toEqual({
-      success: true,
+      success: true
     })
   })
 })
@@ -279,7 +279,7 @@ export const fetchData = () => {
   //自定义一个Promise给定返回的数据(代替发送数据请求)
   return new Promise((resolved, reject) => {
     resolved({
-      data: "(function(){return '123})()",
+      data: "(function(){return '123})()"
     })
   })
 }
